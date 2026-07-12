@@ -1,0 +1,131 @@
+<script lang="ts">
+	import type { AuthContext } from '$lib/types/auth';
+	import {
+		MOBILE_NAVIGATION_DIALOG_ID,
+		MOBILE_NAVIGATION_TOGGLE_ID
+	} from './mobile-navigation';
+	import Icon from './Icon.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import BranchIndicator from './BranchIndicator.svelte';
+	import UserMenu from './UserMenu.svelte';
+
+	interface Props {
+		auth: AuthContext;
+		title: string;
+		description?: string;
+		isNavigationOpen: boolean;
+		onOpenNavigation: () => void;
+	}
+
+	let { auth, title, description, isNavigationOpen, onOpenNavigation }: Props = $props();
+</script>
+
+<header class="topbar">
+	<div class="topbar__primary">
+		<div class="topbar__menu-button">
+			<Button
+				id={MOBILE_NAVIGATION_TOGGLE_ID}
+				variant="secondary"
+				size="sm"
+				aria-label="Buka navigasi aplikasi"
+				aria-controls={MOBILE_NAVIGATION_DIALOG_ID}
+				aria-expanded={isNavigationOpen}
+				aria-haspopup="dialog"
+				onclick={onOpenNavigation}
+			>
+				<Icon name="menu" size={18} />
+			</Button>
+		</div>
+
+		<div class="topbar__titles">
+			<p class="topbar__eyebrow">Aplikasi internal</p>
+			<h1 class="topbar__title">{title}</h1>
+			{#if description}
+				<p class="topbar__description">{description}</p>
+			{/if}
+		</div>
+	</div>
+
+	<div class="topbar__meta">
+		<div class="topbar__branch">
+			<BranchIndicator branch={auth.branch} roleName={auth.role.name} compact />
+		</div>
+		<UserMenu {auth} />
+	</div>
+</header>
+
+<style>
+	.topbar {
+		position: sticky;
+		top: 0;
+		z-index: 15;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		border-bottom: 1px solid var(--line-200);
+		background: rgb(249 250 251 / 0.92);
+		backdrop-filter: blur(12px);
+		padding: 0.875rem 1rem;
+	}
+
+	.topbar__primary {
+		display: flex;
+		align-items: center;
+		gap: 0.875rem;
+		min-width: 0;
+	}
+
+	.topbar__menu-button {
+		flex: none;
+	}
+
+	.topbar__titles {
+		display: grid;
+		gap: 0.125rem;
+		min-width: 0;
+	}
+
+	.topbar__eyebrow {
+		margin: 0;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ink-500);
+	}
+
+	.topbar__title {
+		margin: 0;
+		font-size: 1.125rem;
+		line-height: 1.25;
+		color: var(--ink-950);
+	}
+
+	.topbar__description {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		color: var(--ink-600);
+	}
+
+	.topbar__meta {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		gap: 0.75rem;
+		margin-left: auto;
+	}
+
+	@media (min-width: 960px) {
+		.topbar {
+			padding-inline: 1.25rem;
+		}
+
+		.topbar__menu-button {
+			display: none;
+		}
+	}
+</style>

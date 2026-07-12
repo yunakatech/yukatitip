@@ -1,0 +1,1637 @@
+{
+  "_meta": {
+    "project": "Yukatitip",
+    "schema_version": "MVP-2026-07",
+    "generated_at": "2026-07-12T03:00:00+08:00",
+    "currency": "IDR",
+    "money_format": "Semua nominal uang disimpan sebagai integer rupiah.",
+    "timezone_note": "Timestamp disimpan sebagai ISO-8601. Database production sebaiknya menyimpan UTC.",
+    "auth_note": "Data auth_users adalah contoh. Buat user melalui Supabase Auth sebelum memasukkan profiles.",
+    "load_order": [
+      "roles",
+      "permissions",
+      "role_permissions",
+      "branches",
+      "positions",
+      "auth_users",
+      "profiles",
+      "employees",
+      "employee_assignments",
+      "employee_compensations",
+      "routes",
+      "route_schedules",
+      "route_tariffs",
+      "expense_categories",
+      "customers",
+      "stores",
+      "orders",
+      "order_items",
+      "tracking_events",
+      "payments",
+      "trips",
+      "trip_orders",
+      "trip_handovers",
+      "staff_tasks",
+      "task_items",
+      "commission_periods",
+      "daily_operational_advances",
+      "daily_operational_expenses",
+      "staff_task_revenues",
+      "employee_commissions",
+      "payroll_periods",
+      "payroll_items",
+      "branch_expenses",
+      "branch_budgets",
+      "branch_rent_contracts",
+      "petty_cash_transactions",
+      "attachments",
+      "audit_logs"
+    ]
+  },
+  "roles": [
+    {
+      "id": "10000000-0000-4000-8000-000000000001",
+      "code": "owner",
+      "name": "Owner",
+      "description": "Akses penuh ke seluruh cabang dan pengaturan."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000002",
+      "code": "branch_manager",
+      "name": "Kepala Cabang",
+      "description": "Mengelola operasional cabang."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000003",
+      "code": "branch_admin",
+      "name": "Admin Cabang",
+      "description": "Mengelola administrasi cabang."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000004",
+      "code": "field_staff",
+      "name": "Petugas Lapangan",
+      "description": "Membeli atau mengambil barang."
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000005",
+      "code": "destination_staff",
+      "name": "Petugas Tujuan",
+      "description": "Menerima dan menyerahkan barang."
+    }
+  ],
+  "permissions": [
+    {
+      "id": "11000000-0000-4000-8000-000000000001",
+      "code": "orders.manage",
+      "module": "orders",
+      "name": "Kelola Pesanan",
+      "description": "Membuat dan memperbarui pesanan."
+    },
+    {
+      "id": "11000000-0000-4000-8000-000000000002",
+      "code": "tasks.execute",
+      "module": "tasks",
+      "name": "Kerjakan Tugas",
+      "description": "Melihat dan menyelesaikan tugas yang diberikan."
+    },
+    {
+      "id": "11000000-0000-4000-8000-000000000003",
+      "code": "expenses.approve",
+      "module": "expenses",
+      "name": "Setujui Biaya",
+      "description": "Memverifikasi biaya operasional."
+    },
+    {
+      "id": "11000000-0000-4000-8000-000000000004",
+      "code": "payroll.manage",
+      "module": "payroll",
+      "name": "Kelola Payroll",
+      "description": "Menghitung dan menyetujui payroll."
+    }
+  ],
+  "role_permissions": [
+    {
+      "role_id": "10000000-0000-4000-8000-000000000001",
+      "permission_id": "11000000-0000-4000-8000-000000000001"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000001",
+      "permission_id": "11000000-0000-4000-8000-000000000002"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000001",
+      "permission_id": "11000000-0000-4000-8000-000000000003"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000001",
+      "permission_id": "11000000-0000-4000-8000-000000000004"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "permission_id": "11000000-0000-4000-8000-000000000001"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "permission_id": "11000000-0000-4000-8000-000000000002"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "permission_id": "11000000-0000-4000-8000-000000000003"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000003",
+      "permission_id": "11000000-0000-4000-8000-000000000001"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000004",
+      "permission_id": "11000000-0000-4000-8000-000000000002"
+    },
+    {
+      "role_id": "10000000-0000-4000-8000-000000000005",
+      "permission_id": "11000000-0000-4000-8000-000000000002"
+    }
+  ],
+  "branches": [
+    {
+      "id": "20000000-0000-4000-8000-000000000001",
+      "code": "MKS",
+      "name": "Yukatitip Makassar",
+      "city": "Makassar",
+      "address": "Jl. Contoh Operasional No. 10, Makassar",
+      "whatsapp": "6281110001001",
+      "maps_url": "https://maps.google.com/?q=Yukatitip+Makassar",
+      "opening_hours": "Senin-Sabtu 08.00-18.00 WITA",
+      "is_active": true,
+      "head_employee_id": "40000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000002",
+      "code": "PIN",
+      "name": "Yukatitip Pinrang",
+      "city": "Pinrang",
+      "address": "Jl. Contoh Titik Layanan No. 25, Pinrang",
+      "whatsapp": "6281110002001",
+      "maps_url": "https://maps.google.com/?q=Yukatitip+Pinrang",
+      "opening_hours": "Senin-Sabtu 08.00-18.00 WITA",
+      "is_active": true,
+      "head_employee_id": "40000000-0000-4000-8000-000000000005"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000003",
+      "code": "PRP",
+      "name": "Yukatitip Parepare",
+      "city": "Parepare",
+      "address": "Jl. Contoh Cabang No. 7, Parepare",
+      "whatsapp": "6281110003001",
+      "maps_url": "https://maps.google.com/?q=Yukatitip+Parepare",
+      "opening_hours": "Senin-Sabtu 08.00-18.00 WITA",
+      "is_active": true,
+      "head_employee_id": "40000000-0000-4000-8000-000000000008"
+    }
+  ],
+  "positions": [
+    {
+      "id": "12000000-0000-4000-8000-000000000001",
+      "code": "owner",
+      "name": "Owner",
+      "level": 5,
+      "description": "Penanggung jawab seluruh usaha.",
+      "is_active": true
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000002",
+      "code": "branch_manager",
+      "name": "Kepala Cabang",
+      "level": 4,
+      "description": "Penanggung jawab operasional cabang.",
+      "is_active": true
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000003",
+      "code": "branch_admin",
+      "name": "Admin Cabang",
+      "level": 3,
+      "description": "Administrasi pesanan dan cabang.",
+      "is_active": true
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000004",
+      "code": "field_staff",
+      "name": "Petugas Lapangan",
+      "level": 2,
+      "description": "Pembelian dan pengambilan barang.",
+      "is_active": true
+    },
+    {
+      "id": "12000000-0000-4000-8000-000000000005",
+      "code": "destination_staff",
+      "name": "Petugas Tujuan",
+      "level": 2,
+      "description": "Penerimaan dan serah terima barang.",
+      "is_active": true
+    }
+  ],
+  "auth_users": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "email": "owner@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000002",
+      "email": "kepala.makassar@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000003",
+      "email": "admin.makassar@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000004",
+      "email": "petugas.makassar@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000005",
+      "email": "kepala.pinrang@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000006",
+      "email": "admin.pinrang@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000007",
+      "email": "petugas.pinrang@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000008",
+      "email": "kepala.parepare@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000009",
+      "email": "petugas.parepare@yukatitip.local",
+      "password": "CHANGE_ME_IN_LOCAL_DEVELOPMENT",
+      "email_confirmed": true
+    }
+  ],
+  "profiles": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "full_name": "Yunaka Owner",
+      "phone": "6281111110001",
+      "role_id": "10000000-0000-4000-8000-000000000001",
+      "branch_id": null,
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000002",
+      "full_name": "Rahmat Hidayat",
+      "phone": "6281111110002",
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000003",
+      "full_name": "Nadia Putri",
+      "phone": "6281111110003",
+      "role_id": "10000000-0000-4000-8000-000000000003",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000004",
+      "full_name": "Andi Saputra",
+      "phone": "6281111110004",
+      "role_id": "10000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000005",
+      "full_name": "Faisal Ahmad",
+      "phone": "6281111110005",
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000006",
+      "full_name": "Nur Aisyah",
+      "phone": "6281111110006",
+      "role_id": "10000000-0000-4000-8000-000000000003",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000007",
+      "full_name": "Budi Santoso",
+      "phone": "6281111110007",
+      "role_id": "10000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000008",
+      "full_name": "Sarina Yusuf",
+      "phone": "6281111110008",
+      "role_id": "10000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "status": "active"
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000009",
+      "full_name": "Rian Pratama",
+      "phone": "6281111110009",
+      "role_id": "10000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "status": "active"
+    }
+  ],
+  "employees": [
+    {
+      "id": "40000000-0000-4000-8000-000000000001",
+      "employee_number": "EMP-0001",
+      "profile_id": "30000000-0000-4000-8000-000000000001",
+      "full_name": "Yunaka Owner",
+      "phone": "6281111110001",
+      "email": "owner@yukatitip.local",
+      "address": "Pinrang",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "position_id": "12000000-0000-4000-8000-000000000001",
+      "supervisor_employee_id": null,
+      "join_date": "2026-01-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000001",
+      "notes": "Data contoh."
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000002",
+      "employee_number": "EMP-MKS-0001",
+      "profile_id": "30000000-0000-4000-8000-000000000002",
+      "full_name": "Rahmat Hidayat",
+      "phone": "6281111110002",
+      "email": "kepala.makassar@yukatitip.local",
+      "address": "Makassar",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "position_id": "12000000-0000-4000-8000-000000000002",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000001",
+      "join_date": "2026-02-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000002",
+      "notes": null
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000003",
+      "employee_number": "EMP-MKS-0002",
+      "profile_id": "30000000-0000-4000-8000-000000000003",
+      "full_name": "Nadia Putri",
+      "phone": "6281111110003",
+      "email": "admin.makassar@yukatitip.local",
+      "address": "Makassar",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "position_id": "12000000-0000-4000-8000-000000000003",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000002",
+      "join_date": "2026-03-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000003",
+      "notes": null
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000004",
+      "employee_number": "EMP-MKS-0003",
+      "profile_id": "30000000-0000-4000-8000-000000000004",
+      "full_name": "Andi Saputra",
+      "phone": "6281111110004",
+      "email": "petugas.makassar@yukatitip.local",
+      "address": "Makassar",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000002",
+      "join_date": "2026-03-15",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000004",
+      "notes": "Menggunakan kendaraan pribadi."
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000005",
+      "employee_number": "EMP-PIN-0001",
+      "profile_id": "30000000-0000-4000-8000-000000000005",
+      "full_name": "Faisal Ahmad",
+      "phone": "6281111110005",
+      "email": "kepala.pinrang@yukatitip.local",
+      "address": "Pinrang",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "position_id": "12000000-0000-4000-8000-000000000002",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000001",
+      "join_date": "2026-02-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000005",
+      "notes": null
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000006",
+      "employee_number": "EMP-PIN-0002",
+      "profile_id": "30000000-0000-4000-8000-000000000006",
+      "full_name": "Nur Aisyah",
+      "phone": "6281111110006",
+      "email": "admin.pinrang@yukatitip.local",
+      "address": "Pinrang",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "position_id": "12000000-0000-4000-8000-000000000003",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000005",
+      "join_date": "2026-03-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000006",
+      "notes": null
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000007",
+      "employee_number": "EMP-PIN-0003",
+      "profile_id": "30000000-0000-4000-8000-000000000007",
+      "full_name": "Budi Santoso",
+      "phone": "6281111110007",
+      "email": "petugas.pinrang@yukatitip.local",
+      "address": "Pinrang",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000005",
+      "join_date": "2026-03-15",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000007",
+      "notes": "Menggunakan kendaraan pribadi."
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000008",
+      "employee_number": "EMP-PRP-0001",
+      "profile_id": "30000000-0000-4000-8000-000000000008",
+      "full_name": "Sarina Yusuf",
+      "phone": "6281111110008",
+      "email": "kepala.parepare@yukatitip.local",
+      "address": "Parepare",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "position_id": "12000000-0000-4000-8000-000000000002",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000001",
+      "join_date": "2026-06-01",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000008",
+      "notes": null
+    },
+    {
+      "id": "40000000-0000-4000-8000-000000000009",
+      "employee_number": "EMP-PRP-0002",
+      "profile_id": "30000000-0000-4000-8000-000000000009",
+      "full_name": "Rian Pratama",
+      "phone": "6281111110009",
+      "email": "petugas.parepare@yukatitip.local",
+      "address": "Parepare",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000008",
+      "join_date": "2026-06-15",
+      "employment_status": "active",
+      "bank_name": "Bank Contoh",
+      "bank_account": "0001000009",
+      "notes": "Menggunakan kendaraan pribadi."
+    }
+  ],
+  "employee_assignments": [
+    {
+      "id": "41000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000002",
+      "effective_from": "2026-03-15",
+      "effective_until": null,
+      "reason": "Penempatan awal",
+      "created_by": "30000000-0000-4000-8000-000000000002",
+      "updated_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "41000000-0000-4000-8000-000000000002",
+      "employee_id": "40000000-0000-4000-8000-000000000007",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000005",
+      "effective_from": "2026-03-15",
+      "effective_until": null,
+      "reason": "Penempatan awal",
+      "created_by": "30000000-0000-4000-8000-000000000005",
+      "updated_by": "30000000-0000-4000-8000-000000000005"
+    },
+    {
+      "id": "41000000-0000-4000-8000-000000000003",
+      "employee_id": "40000000-0000-4000-8000-000000000009",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "position_id": "12000000-0000-4000-8000-000000000004",
+      "supervisor_employee_id": "40000000-0000-4000-8000-000000000008",
+      "effective_from": "2026-06-15",
+      "effective_until": null,
+      "reason": "Penempatan awal",
+      "created_by": "30000000-0000-4000-8000-000000000008",
+      "updated_by": "30000000-0000-4000-8000-000000000008"
+    }
+  ],
+  "employee_compensations": [
+    {
+      "id": "42000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "base_salary": 2500000,
+      "vehicle_allowance": 400000,
+      "communication_allowance": 150000,
+      "commission_rate": 20.0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    },
+    {
+      "id": "42000000-0000-4000-8000-000000000002",
+      "employee_id": "40000000-0000-4000-8000-000000000007",
+      "base_salary": 2300000,
+      "vehicle_allowance": 350000,
+      "communication_allowance": 150000,
+      "commission_rate": 20.0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    },
+    {
+      "id": "42000000-0000-4000-8000-000000000003",
+      "employee_id": "40000000-0000-4000-8000-000000000009",
+      "base_salary": 2200000,
+      "vehicle_allowance": 350000,
+      "communication_allowance": 150000,
+      "commission_rate": 18.0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    }
+  ],
+  "routes": [
+    {
+      "id": "50000000-0000-4000-8000-000000000001",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000001",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Makassar → Pinrang",
+      "estimated_duration_minutes": 300,
+      "base_fee": 20000,
+      "is_active": true
+    },
+    {
+      "id": "50000000-0000-4000-8000-000000000002",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000002",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000001",
+      "name": "Pinrang → Makassar",
+      "estimated_duration_minutes": 300,
+      "base_fee": 20000,
+      "is_active": true
+    },
+    {
+      "id": "50000000-0000-4000-8000-000000000003",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000002",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000003",
+      "name": "Pinrang → Parepare",
+      "estimated_duration_minutes": 60,
+      "base_fee": 15000,
+      "is_active": true
+    },
+    {
+      "id": "50000000-0000-4000-8000-000000000004",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000003",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Parepare → Pinrang",
+      "estimated_duration_minutes": 60,
+      "base_fee": 15000,
+      "is_active": true
+    }
+  ],
+  "route_schedules": [
+    {
+      "id": "51000000-0000-4000-8000-000000000001",
+      "route_id": "50000000-0000-4000-8000-000000000001",
+      "day_of_week": 5,
+      "departure_time": "08:00:00",
+      "is_active": true,
+      "notes": "Jumat pagi"
+    },
+    {
+      "id": "51000000-0000-4000-8000-000000000002",
+      "route_id": "50000000-0000-4000-8000-000000000002",
+      "day_of_week": 0,
+      "departure_time": "08:00:00",
+      "is_active": true,
+      "notes": "Minggu pagi"
+    },
+    {
+      "id": "51000000-0000-4000-8000-000000000003",
+      "route_id": "50000000-0000-4000-8000-000000000003",
+      "day_of_week": 2,
+      "departure_time": "09:00:00",
+      "is_active": true,
+      "notes": "Selasa pagi"
+    },
+    {
+      "id": "51000000-0000-4000-8000-000000000004",
+      "route_id": "50000000-0000-4000-8000-000000000004",
+      "day_of_week": 6,
+      "departure_time": "09:00:00",
+      "is_active": true,
+      "notes": "Sabtu pagi"
+    }
+  ],
+  "route_tariffs": [
+    {
+      "id": "52000000-0000-4000-8000-000000000001",
+      "route_id": "50000000-0000-4000-8000-000000000001",
+      "service_type": "purchase",
+      "minimum_service_fee": 25000,
+      "percentage_fee": 10.0,
+      "local_delivery_fee": 10000,
+      "handling_fee": 0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    },
+    {
+      "id": "52000000-0000-4000-8000-000000000002",
+      "route_id": "50000000-0000-4000-8000-000000000002",
+      "service_type": "pickup",
+      "minimum_service_fee": 20000,
+      "percentage_fee": 0.0,
+      "local_delivery_fee": 10000,
+      "handling_fee": 0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    },
+    {
+      "id": "52000000-0000-4000-8000-000000000003",
+      "route_id": "50000000-0000-4000-8000-000000000003",
+      "service_type": "delivery",
+      "minimum_service_fee": 15000,
+      "percentage_fee": 0.0,
+      "local_delivery_fee": 5000,
+      "handling_fee": 0,
+      "effective_from": "2026-07-01",
+      "effective_until": null,
+      "is_active": true
+    }
+  ],
+  "expense_categories": [
+    {
+      "id": "60000000-0000-4000-8000-000000000001",
+      "code": "fuel",
+      "name": "BBM",
+      "scope": "field",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000002",
+      "code": "meal",
+      "name": "Uang Makan",
+      "scope": "field",
+      "requires_receipt": false,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000003",
+      "code": "parking",
+      "name": "Parkir",
+      "scope": "field",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000004",
+      "code": "toll",
+      "name": "Tol",
+      "scope": "field",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000005",
+      "code": "electricity",
+      "name": "Listrik",
+      "scope": "branch",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000006",
+      "code": "water",
+      "name": "Air",
+      "scope": "branch",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000007",
+      "code": "internet",
+      "name": "Internet / Wi-Fi",
+      "scope": "branch",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000008",
+      "code": "rent",
+      "name": "Sewa",
+      "scope": "branch",
+      "requires_receipt": true,
+      "is_active": true
+    },
+    {
+      "id": "60000000-0000-4000-8000-000000000009",
+      "code": "packaging",
+      "name": "Pengemasan",
+      "scope": "both",
+      "requires_receipt": true,
+      "is_active": true
+    }
+  ],
+  "customers": [
+    {
+      "id": "70000000-0000-4000-8000-000000000001",
+      "home_branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Siti Rahma",
+      "phone": "6285210000001",
+      "email": null,
+      "customer_type": "individual",
+      "address": "Watang Sawitto",
+      "district": "Watang Sawitto",
+      "city": "Pinrang",
+      "landmark": "Dekat pasar",
+      "status": "active",
+      "notes": "Sering titip skincare.",
+      "first_transaction_at": "2026-07-05T08:00:00+08:00",
+      "created_by": "30000000-0000-4000-8000-000000000006"
+    },
+    {
+      "id": "70000000-0000-4000-8000-000000000002",
+      "home_branch_id": "20000000-0000-4000-8000-000000000001",
+      "name": "Dimas Pratama",
+      "phone": "6285210000002",
+      "email": "dimas@example.test",
+      "customer_type": "business",
+      "address": "Panakkukang",
+      "district": "Panakkukang",
+      "city": "Makassar",
+      "landmark": "Kompleks usaha",
+      "status": "active",
+      "notes": "Pemilik kedai.",
+      "first_transaction_at": "2026-07-04T08:00:00+08:00",
+      "created_by": "30000000-0000-4000-8000-000000000003"
+    },
+    {
+      "id": "70000000-0000-4000-8000-000000000003",
+      "home_branch_id": "20000000-0000-4000-8000-000000000003",
+      "name": "Maya Lestari",
+      "phone": "6285210000003",
+      "email": null,
+      "customer_type": "reseller",
+      "address": "Ujung",
+      "district": "Ujung",
+      "city": "Parepare",
+      "landmark": "Dekat terminal",
+      "status": "active",
+      "notes": null,
+      "first_transaction_at": "2026-07-07T08:00:00+08:00",
+      "created_by": "30000000-0000-4000-8000-000000000008"
+    },
+    {
+      "id": "70000000-0000-4000-8000-000000000004",
+      "home_branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Arman Yusuf",
+      "phone": "6285210000004",
+      "email": null,
+      "customer_type": "individual",
+      "address": "Paleteang",
+      "district": "Paleteang",
+      "city": "Pinrang",
+      "landmark": "Dekat sekolah",
+      "status": "active",
+      "notes": null,
+      "first_transaction_at": "2026-07-09T08:00:00+08:00",
+      "created_by": "30000000-0000-4000-8000-000000000006"
+    }
+  ],
+  "stores": [
+    {
+      "id": "71000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "name": "Toko Skincare Resmi",
+      "address": "Panakkukang, Makassar",
+      "city": "Makassar",
+      "phone": "628123450001",
+      "maps_url": "https://maps.google.com/?q=Toko+Skincare+Resmi+Makassar",
+      "opening_hours": "10.00-21.00 WITA",
+      "notes": null,
+      "is_active": true
+    },
+    {
+      "id": "71000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Pusat Oleh-Oleh Pinrang",
+      "address": "Watang Sawitto, Pinrang",
+      "city": "Pinrang",
+      "phone": "628123450002",
+      "maps_url": "https://maps.google.com/?q=Pusat+Oleh-Oleh+Pinrang",
+      "opening_hours": "08.00-20.00 WITA",
+      "notes": null,
+      "is_active": true
+    },
+    {
+      "id": "71000000-0000-4000-8000-000000000003",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "name": "Toko Kemasan Pinrang",
+      "address": "Paleteang, Pinrang",
+      "city": "Pinrang",
+      "phone": "628123450003",
+      "maps_url": "https://maps.google.com/?q=Toko+Kemasan+Pinrang",
+      "opening_hours": "08.00-18.00 WITA",
+      "notes": null,
+      "is_active": true
+    },
+    {
+      "id": "71000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000003",
+      "name": "Toko Kue Parepare",
+      "address": "Ujung, Parepare",
+      "city": "Parepare",
+      "phone": "628123450004",
+      "maps_url": "https://maps.google.com/?q=Toko+Kue+Parepare",
+      "opening_hours": "07.00-19.00 WITA",
+      "notes": null,
+      "is_active": true
+    }
+  ],
+  "orders": [
+    {
+      "id": "80000000-0000-4000-8000-000000000001",
+      "tracking_number": "YKT-2607-00125",
+      "service_type": "purchase",
+      "fulfillment_method": "branch_pickup",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000001",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000002",
+      "route_id": "50000000-0000-4000-8000-000000000001",
+      "sender_customer_id": "70000000-0000-4000-8000-000000000001",
+      "receiver_customer_id": "70000000-0000-4000-8000-000000000001",
+      "status": "in_transit",
+      "payment_status": "paid",
+      "goods_amount": 350000,
+      "service_revenue": 50000,
+      "additional_service_fees": 10000,
+      "discount_amount": 0,
+      "delivery_address": null,
+      "public_notes": "Ambil di titik Yukatitip Pinrang.",
+      "internal_notes": "Pastikan varian produk sesuai foto.",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "updated_by": "30000000-0000-4000-8000-000000000003"
+    },
+    {
+      "id": "80000000-0000-4000-8000-000000000002",
+      "tracking_number": "YKT-2607-00126",
+      "service_type": "pickup",
+      "fulfillment_method": "branch_pickup",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000002",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000001",
+      "route_id": "50000000-0000-4000-8000-000000000002",
+      "sender_customer_id": "70000000-0000-4000-8000-000000000002",
+      "receiver_customer_id": "70000000-0000-4000-8000-000000000002",
+      "status": "ready_for_handover",
+      "payment_status": "paid",
+      "goods_amount": 0,
+      "service_revenue": 30000,
+      "additional_service_fees": 10000,
+      "discount_amount": 0,
+      "delivery_address": null,
+      "public_notes": "Siap diambil di cabang Makassar.",
+      "internal_notes": null,
+      "created_by": "30000000-0000-4000-8000-000000000006",
+      "updated_by": "30000000-0000-4000-8000-000000000003"
+    },
+    {
+      "id": "80000000-0000-4000-8000-000000000003",
+      "tracking_number": "YKT-2607-00127",
+      "service_type": "delivery",
+      "fulfillment_method": "branch_pickup",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000002",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000003",
+      "route_id": "50000000-0000-4000-8000-000000000003",
+      "sender_customer_id": "70000000-0000-4000-8000-000000000004",
+      "receiver_customer_id": "70000000-0000-4000-8000-000000000003",
+      "status": "waiting_departure",
+      "payment_status": "paid",
+      "goods_amount": 0,
+      "service_revenue": 20000,
+      "additional_service_fees": 5000,
+      "discount_amount": 0,
+      "delivery_address": null,
+      "public_notes": "Barang menunggu keberangkatan ke Parepare.",
+      "internal_notes": "Paket kecil, tidak pecah belah.",
+      "created_by": "30000000-0000-4000-8000-000000000006",
+      "updated_by": "30000000-0000-4000-8000-000000000006"
+    },
+    {
+      "id": "80000000-0000-4000-8000-000000000004",
+      "tracking_number": "YKT-2607-00128",
+      "service_type": "purchase",
+      "fulfillment_method": "local_delivery",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000003",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000002",
+      "route_id": "50000000-0000-4000-8000-000000000004",
+      "sender_customer_id": "70000000-0000-4000-8000-000000000004",
+      "receiver_customer_id": "70000000-0000-4000-8000-000000000004",
+      "status": "waiting_payment",
+      "payment_status": "unpaid",
+      "goods_amount": 120000,
+      "service_revenue": 20000,
+      "additional_service_fees": 10000,
+      "discount_amount": 0,
+      "delivery_address": "Paleteang, Pinrang",
+      "public_notes": "Pesanan menunggu pembayaran.",
+      "internal_notes": "Jangan dibeli sebelum lunas.",
+      "created_by": "30000000-0000-4000-8000-000000000008",
+      "updated_by": "30000000-0000-4000-8000-000000000008"
+    }
+  ],
+  "order_items": [
+    {
+      "id": "81000000-0000-4000-8000-000000000001",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "store_id": "71000000-0000-4000-8000-000000000001",
+      "product_name": "Skincare Paket A",
+      "product_url": "https://example.test/products/skincare-a",
+      "quantity": 1,
+      "estimated_unit_price": 350000,
+      "actual_unit_price": 350000,
+      "weight_grams": 700,
+      "attributes": {
+        "variant": "Brightening",
+        "size": "Regular"
+      },
+      "notes": "Pastikan segel utuh.",
+      "status": "packed"
+    },
+    {
+      "id": "81000000-0000-4000-8000-000000000002",
+      "order_id": "80000000-0000-4000-8000-000000000002",
+      "store_id": "71000000-0000-4000-8000-000000000002",
+      "product_name": "Paket Oleh-Oleh Pinrang",
+      "product_url": null,
+      "quantity": 2,
+      "estimated_unit_price": 75000,
+      "actual_unit_price": 75000,
+      "weight_grams": 2000,
+      "attributes": {
+        "flavor": "Campur"
+      },
+      "notes": null,
+      "status": "completed"
+    },
+    {
+      "id": "81000000-0000-4000-8000-000000000003",
+      "order_id": "80000000-0000-4000-8000-000000000003",
+      "store_id": null,
+      "product_name": "Paket Kemasan Usaha",
+      "product_url": null,
+      "quantity": 1,
+      "estimated_unit_price": 0,
+      "actual_unit_price": 0,
+      "weight_grams": 1200,
+      "attributes": {
+        "package_type": "Dus"
+      },
+      "notes": "Barang dari customer.",
+      "status": "received_at_origin"
+    },
+    {
+      "id": "81000000-0000-4000-8000-000000000004",
+      "order_id": "80000000-0000-4000-8000-000000000004",
+      "store_id": "71000000-0000-4000-8000-000000000004",
+      "product_name": "Kue Kering Parepare",
+      "product_url": null,
+      "quantity": 4,
+      "estimated_unit_price": 30000,
+      "actual_unit_price": null,
+      "weight_grams": 1600,
+      "attributes": {
+        "packaging": "Toples kecil"
+      },
+      "notes": "Beli setelah pembayaran lunas.",
+      "status": "recorded"
+    }
+  ],
+  "tracking_events": [
+    {
+      "id": "82000000-0000-4000-8000-000000000001",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "status": "recorded",
+      "public_description": "Pesanan berhasil dicatat.",
+      "internal_description": null,
+      "location": "Makassar",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "created_at": "2026-07-10T09:00:00+08:00"
+    },
+    {
+      "id": "82000000-0000-4000-8000-000000000002",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "status": "payment_received",
+      "public_description": "Pembayaran telah diterima.",
+      "internal_description": "Transfer diverifikasi admin Makassar.",
+      "location": "Makassar",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "created_at": "2026-07-10T10:00:00+08:00"
+    },
+    {
+      "id": "82000000-0000-4000-8000-000000000003",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "status": "purchasing_or_collecting",
+      "public_description": "Barang sedang dibeli di Makassar.",
+      "internal_description": "Petugas berada di toko.",
+      "location": "Makassar",
+      "created_by": "30000000-0000-4000-8000-000000000004",
+      "created_at": "2026-07-11T13:00:00+08:00"
+    },
+    {
+      "id": "82000000-0000-4000-8000-000000000004",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "status": "in_transit",
+      "public_description": "Barang sedang dalam perjalanan ke Pinrang.",
+      "internal_description": "Masuk batch BTH-2607-0021.",
+      "location": "Makassar",
+      "created_by": "30000000-0000-4000-8000-000000000002",
+      "created_at": "2026-07-12T08:00:00+08:00"
+    },
+    {
+      "id": "82000000-0000-4000-8000-000000000005",
+      "order_id": "80000000-0000-4000-8000-000000000002",
+      "status": "ready_for_handover",
+      "public_description": "Barang siap diambil di cabang Makassar.",
+      "internal_description": "Paket diterima sesuai manifest.",
+      "location": "Makassar",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "created_at": "2026-07-12T11:30:00+08:00"
+    }
+  ],
+  "payments": [
+    {
+      "id": "83000000-0000-4000-8000-000000000001",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "amount": 410000,
+      "payment_method": "bank_transfer",
+      "status": "paid",
+      "paid_at": "2026-07-10T09:45:00+08:00",
+      "verified_by": "30000000-0000-4000-8000-000000000003",
+      "verified_at": "2026-07-10T10:00:00+08:00",
+      "notes": "Pembayaran penuh."
+    },
+    {
+      "id": "83000000-0000-4000-8000-000000000002",
+      "order_id": "80000000-0000-4000-8000-000000000002",
+      "amount": 40000,
+      "payment_method": "qris_manual",
+      "status": "paid",
+      "paid_at": "2026-07-09T16:00:00+08:00",
+      "verified_by": "30000000-0000-4000-8000-000000000006",
+      "verified_at": "2026-07-09T16:10:00+08:00",
+      "notes": null
+    },
+    {
+      "id": "83000000-0000-4000-8000-000000000003",
+      "order_id": "80000000-0000-4000-8000-000000000003",
+      "amount": 25000,
+      "payment_method": "cash",
+      "status": "paid",
+      "paid_at": "2026-07-11T10:00:00+08:00",
+      "verified_by": "30000000-0000-4000-8000-000000000006",
+      "verified_at": "2026-07-11T10:00:00+08:00",
+      "notes": null
+    }
+  ],
+  "trips": [
+    {
+      "id": "90000000-0000-4000-8000-000000000001",
+      "trip_number": "BTH-2607-0021",
+      "route_id": "50000000-0000-4000-8000-000000000001",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000001",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000002",
+      "departure_at": "2026-07-12T08:00:00+08:00",
+      "arrival_at": null,
+      "origin_staff_id": "40000000-0000-4000-8000-000000000004",
+      "destination_staff_id": "40000000-0000-4000-8000-000000000007",
+      "status": "in_transit",
+      "vehicle_description": "Mobil operasional MPV",
+      "notes": "Batch Makassar ke Pinrang.",
+      "created_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "90000000-0000-4000-8000-000000000002",
+      "trip_number": "BTH-2607-0022",
+      "route_id": "50000000-0000-4000-8000-000000000003",
+      "origin_branch_id": "20000000-0000-4000-8000-000000000002",
+      "destination_branch_id": "20000000-0000-4000-8000-000000000003",
+      "departure_at": "2026-07-14T09:00:00+08:00",
+      "arrival_at": null,
+      "origin_staff_id": "40000000-0000-4000-8000-000000000007",
+      "destination_staff_id": "40000000-0000-4000-8000-000000000009",
+      "status": "preparing",
+      "vehicle_description": "Motor dan kendaraan titipan batch",
+      "notes": "Batch Pinrang ke Parepare.",
+      "created_by": "30000000-0000-4000-8000-000000000005"
+    }
+  ],
+  "trip_orders": [
+    {
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "package_count": 1,
+      "added_by": "30000000-0000-4000-8000-000000000002",
+      "added_at": "2026-07-11T19:00:00+08:00"
+    },
+    {
+      "trip_id": "90000000-0000-4000-8000-000000000002",
+      "order_id": "80000000-0000-4000-8000-000000000003",
+      "package_count": 1,
+      "added_by": "30000000-0000-4000-8000-000000000005",
+      "added_at": "2026-07-12T18:00:00+08:00"
+    }
+  ],
+  "trip_handovers": [
+    {
+      "id": "91000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "handover_type": "departure",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "total_packages": 1,
+      "notes": "Jumlah sesuai manifest.",
+      "confirmed_at": "2026-07-12T07:55:00+08:00"
+    }
+  ],
+  "staff_tasks": [
+    {
+      "id": "92000000-0000-4000-8000-000000000001",
+      "task_number": "TSK-2607-0031",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "assigned_to": "40000000-0000-4000-8000-000000000004",
+      "area": "Panakkukang",
+      "operational_budget": 165000,
+      "status": "completed",
+      "started_at": "2026-07-11T11:00:00+08:00",
+      "completed_at": "2026-07-11T16:00:00+08:00",
+      "notes": "Pengambilan skincare dan pengemasan.",
+      "created_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "92000000-0000-4000-8000-000000000002",
+      "task_number": "TSK-2607-0032",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "trip_id": "90000000-0000-4000-8000-000000000002",
+      "assigned_to": "40000000-0000-4000-8000-000000000007",
+      "area": "Watang Sawitto",
+      "operational_budget": 90000,
+      "status": "in_progress",
+      "started_at": "2026-07-12T09:00:00+08:00",
+      "completed_at": null,
+      "notes": "Persiapan paket menuju Parepare.",
+      "created_by": "30000000-0000-4000-8000-000000000005"
+    }
+  ],
+  "task_items": [
+    {
+      "id": "93000000-0000-4000-8000-000000000001",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "order_item_id": "81000000-0000-4000-8000-000000000001",
+      "status": "completed",
+      "actual_price": 350000,
+      "notes": "Barang tersedia."
+    },
+    {
+      "id": "93000000-0000-4000-8000-000000000002",
+      "task_id": "92000000-0000-4000-8000-000000000002",
+      "order_item_id": "81000000-0000-4000-8000-000000000003",
+      "status": "in_progress",
+      "actual_price": 0,
+      "notes": "Barang sudah di titik asal."
+    }
+  ],
+  "commission_periods": [
+    {
+      "id": "A0000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "status": "calculated",
+      "approved_by": null,
+      "approved_at": null,
+      "locked_at": null
+    },
+    {
+      "id": "A0000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "status": "draft",
+      "approved_by": null,
+      "approved_at": null,
+      "locked_at": null
+    }
+  ],
+  "daily_operational_advances": [
+    {
+      "id": "A1000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "advance_date": "2026-07-11",
+      "amount": 165000,
+      "status": "waiting_settlement",
+      "submitted_by": "30000000-0000-4000-8000-000000000002",
+      "approved_by": "30000000-0000-4000-8000-000000000002",
+      "disbursed_by": "30000000-0000-4000-8000-000000000003",
+      "disbursed_at": "2026-07-11T10:30:00+08:00",
+      "settled_at": null,
+      "notes": "Anggaran BBM, makan, dan parkir."
+    },
+    {
+      "id": "A1000000-0000-4000-8000-000000000002",
+      "employee_id": "40000000-0000-4000-8000-000000000007",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "task_id": "92000000-0000-4000-8000-000000000002",
+      "trip_id": "90000000-0000-4000-8000-000000000002",
+      "advance_date": "2026-07-12",
+      "amount": 90000,
+      "status": "in_use",
+      "submitted_by": "30000000-0000-4000-8000-000000000005",
+      "approved_by": "30000000-0000-4000-8000-000000000005",
+      "disbursed_by": "30000000-0000-4000-8000-000000000006",
+      "disbursed_at": "2026-07-12T08:30:00+08:00",
+      "settled_at": null,
+      "notes": "Anggaran harian petugas Pinrang."
+    }
+  ],
+  "daily_operational_expenses": [
+    {
+      "id": "A2000000-0000-4000-8000-000000000001",
+      "advance_id": "A1000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000001",
+      "expense_date": "2026-07-11",
+      "amount": 100000,
+      "notes": "BBM tugas Panakkukang.",
+      "approval_status": "approved",
+      "approved_by": "30000000-0000-4000-8000-000000000002",
+      "approved_at": "2026-07-11T18:00:00+08:00",
+      "commission_period_id": "A0000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "A2000000-0000-4000-8000-000000000002",
+      "advance_id": "A1000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000002",
+      "expense_date": "2026-07-11",
+      "amount": 25000,
+      "notes": "Uang makan satu kali.",
+      "approval_status": "approved",
+      "approved_by": "30000000-0000-4000-8000-000000000002",
+      "approved_at": "2026-07-11T18:00:00+08:00",
+      "commission_period_id": "A0000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "A2000000-0000-4000-8000-000000000003",
+      "advance_id": "A1000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "trip_id": "90000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000003",
+      "expense_date": "2026-07-11",
+      "amount": 15000,
+      "notes": "Parkir dua lokasi.",
+      "approval_status": "approved",
+      "approved_by": "30000000-0000-4000-8000-000000000002",
+      "approved_at": "2026-07-11T18:00:00+08:00",
+      "commission_period_id": "A0000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "A2000000-0000-4000-8000-000000000004",
+      "advance_id": "A1000000-0000-4000-8000-000000000002",
+      "employee_id": "40000000-0000-4000-8000-000000000007",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "task_id": "92000000-0000-4000-8000-000000000002",
+      "trip_id": "90000000-0000-4000-8000-000000000002",
+      "category_id": "60000000-0000-4000-8000-000000000001",
+      "expense_date": "2026-07-12",
+      "amount": 50000,
+      "notes": "BBM dalam kota.",
+      "approval_status": "submitted",
+      "approved_by": null,
+      "approved_at": null,
+      "commission_period_id": null
+    }
+  ],
+  "staff_task_revenues": [
+    {
+      "id": "A3000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "task_id": "92000000-0000-4000-8000-000000000001",
+      "order_id": "80000000-0000-4000-8000-000000000001",
+      "revenue_type": "purchase_service",
+      "gross_revenue": 60000,
+      "allocated_revenue": 60000,
+      "revenue_date": "2026-07-11",
+      "status": "included_in_commission",
+      "commission_period_id": "A0000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "employee_commissions": [
+    {
+      "id": "A4000000-0000-4000-8000-000000000001",
+      "commission_period_id": "A0000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "total_revenue": 60000,
+      "total_operational_expense": 140000,
+      "commission_rate": 20.0,
+      "status": "calculated",
+      "approved_by": null,
+      "approved_at": null
+    }
+  ],
+  "payroll_periods": [
+    {
+      "id": "B0000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "status": "draft",
+      "approved_by": null,
+      "approved_at": null,
+      "paid_at": null,
+      "locked_at": null
+    }
+  ],
+  "payroll_items": [
+    {
+      "id": "B1000000-0000-4000-8000-000000000001",
+      "payroll_period_id": "B0000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "item_type": "base_salary",
+      "description": "Gaji pokok Juli 2026",
+      "amount": 2500000,
+      "reference_id": "42000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "B1000000-0000-4000-8000-000000000002",
+      "payroll_period_id": "B0000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "item_type": "vehicle_allowance",
+      "description": "Tunjangan kendaraan Juli 2026",
+      "amount": 400000,
+      "reference_id": "42000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "B1000000-0000-4000-8000-000000000003",
+      "payroll_period_id": "B0000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "item_type": "communication_allowance",
+      "description": "Tunjangan pulsa/internet Juli 2026",
+      "amount": 150000,
+      "reference_id": "42000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "B1000000-0000-4000-8000-000000000004",
+      "payroll_period_id": "B0000000-0000-4000-8000-000000000001",
+      "employee_id": "40000000-0000-4000-8000-000000000004",
+      "item_type": "commission",
+      "description": "Komisi Juli 2026",
+      "amount": 0,
+      "reference_id": "A4000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "branch_expenses": [
+    {
+      "id": "C0000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000005",
+      "vendor": "PLN",
+      "amount": 425000,
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "invoice_date": "2026-07-05",
+      "due_date": "2026-07-20",
+      "paid_at": "2026-07-10T10:00:00+08:00",
+      "status": "paid",
+      "notes": "Tagihan listrik Juli 2026.",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "approved_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "C0000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000007",
+      "vendor": "ISP Contoh",
+      "amount": 400000,
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "invoice_date": "2026-07-01",
+      "due_date": "2026-07-15",
+      "paid_at": "2026-07-05T10:00:00+08:00",
+      "status": "paid",
+      "notes": "Internet cabang Makassar.",
+      "created_by": "30000000-0000-4000-8000-000000000003",
+      "approved_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "C0000000-0000-4000-8000-000000000003",
+      "branch_id": "20000000-0000-4000-8000-000000000002",
+      "category_id": "60000000-0000-4000-8000-000000000006",
+      "vendor": "PDAM Contoh",
+      "amount": 135000,
+      "period_start": "2026-07-01",
+      "period_end": "2026-07-31",
+      "invoice_date": "2026-07-05",
+      "due_date": "2026-07-20",
+      "paid_at": null,
+      "status": "approved",
+      "notes": "Tagihan air Juli 2026.",
+      "created_by": "30000000-0000-4000-8000-000000000006",
+      "approved_by": "30000000-0000-4000-8000-000000000005"
+    }
+  ],
+  "branch_budgets": [
+    {
+      "id": "C1000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000005",
+      "budget_month": "2026-07-01",
+      "budget_amount": 500000,
+      "notes": "Anggaran listrik Makassar.",
+      "created_by": "30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "C1000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "category_id": "60000000-0000-4000-8000-000000000007",
+      "budget_month": "2026-07-01",
+      "budget_amount": 400000,
+      "notes": "Anggaran internet Makassar.",
+      "created_by": "30000000-0000-4000-8000-000000000002"
+    }
+  ],
+  "branch_rent_contracts": [
+    {
+      "id": "C2000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "landlord_name": "Pemilik Ruko Contoh",
+      "start_date": "2026-01-01",
+      "end_date": "2026-12-31",
+      "total_amount": 24000000,
+      "payment_date": "2026-01-02",
+      "monthly_allocation": 2000000,
+      "status": "active",
+      "notes": "Kontrak tahunan cabang Makassar.",
+      "created_by": "30000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "petty_cash_transactions": [
+    {
+      "id": "C3000000-0000-4000-8000-000000000001",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "transaction_type": "cash_in",
+      "category_id": null,
+      "amount": 1000000,
+      "employee_id": "40000000-0000-4000-8000-000000000002",
+      "description": "Saldo awal kas kecil Juli 2026.",
+      "transaction_date": "2026-07-01",
+      "created_by": "30000000-0000-4000-8000-000000000003"
+    },
+    {
+      "id": "C3000000-0000-4000-8000-000000000002",
+      "branch_id": "20000000-0000-4000-8000-000000000001",
+      "transaction_type": "cash_out",
+      "category_id": "60000000-0000-4000-8000-000000000009",
+      "amount": 75000,
+      "employee_id": "40000000-0000-4000-8000-000000000003",
+      "description": "Pembelian bahan kemasan.",
+      "transaction_date": "2026-07-08",
+      "created_by": "30000000-0000-4000-8000-000000000003"
+    }
+  ],
+  "attachments": [
+    {
+      "id": "D0000000-0000-4000-8000-000000000001",
+      "entity_type": "payment",
+      "entity_id": "83000000-0000-4000-8000-000000000001",
+      "object_key": "orders/2026/07/YKT-2607-00125/payment/11111111-1111-4111-8111-111111111111.jpg",
+      "original_filename": "bukti-transfer.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 245678,
+      "is_private": true,
+      "uploaded_by": "30000000-0000-4000-8000-000000000003"
+    },
+    {
+      "id": "D0000000-0000-4000-8000-000000000002",
+      "entity_type": "operational_expense",
+      "entity_id": "A2000000-0000-4000-8000-000000000001",
+      "object_key": "expenses/2026/07/40000000-0000-4000-8000-000000000004/22222222-2222-4222-8222-222222222222.jpg",
+      "original_filename": "nota-bbm.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 198765,
+      "is_private": true,
+      "uploaded_by": "30000000-0000-4000-8000-000000000004"
+    },
+    {
+      "id": "D0000000-0000-4000-8000-000000000003",
+      "entity_type": "trip_handover",
+      "entity_id": "91000000-0000-4000-8000-000000000001",
+      "object_key": "trips/2026/07/BTH-2607-0021/handover/33333333-3333-4333-8333-333333333333.jpg",
+      "original_filename": "handover-keberangkatan.jpg",
+      "mime_type": "image/jpeg",
+      "size_bytes": 356789,
+      "is_private": true,
+      "uploaded_by": "30000000-0000-4000-8000-000000000004"
+    },
+    {
+      "id": "D0000000-0000-4000-8000-000000000004",
+      "entity_type": "rent_contract",
+      "entity_id": "C2000000-0000-4000-8000-000000000001",
+      "object_key": "branches/20000000-0000-4000-8000-000000000001/rent-contracts/44444444-4444-4444-8444-444444444444.pdf",
+      "original_filename": "kontrak-sewa-2026.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 845678,
+      "is_private": true,
+      "uploaded_by": "30000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": 1,
+      "request_id": "req_01JYUKATITIP00000000000001",
+      "actor_profile_id": "30000000-0000-4000-8000-000000000003",
+      "action": "payment.verified",
+      "entity_type": "payment",
+      "entity_id": "83000000-0000-4000-8000-000000000001",
+      "old_values": {
+        "status": "unpaid"
+      },
+      "new_values": {
+        "status": "paid",
+        "amount": 410000
+      },
+      "ip_address": "192.0.2.10",
+      "user_agent": "Sample Browser",
+      "created_at": "2026-07-10T10:00:00+08:00"
+    },
+    {
+      "id": 2,
+      "request_id": "req_01JYUKATITIP00000000000002",
+      "actor_profile_id": "30000000-0000-4000-8000-000000000002",
+      "action": "expense.approved",
+      "entity_type": "daily_operational_expense",
+      "entity_id": "A2000000-0000-4000-8000-000000000001",
+      "old_values": {
+        "approval_status": "submitted"
+      },
+      "new_values": {
+        "approval_status": "approved",
+        "amount": 100000
+      },
+      "ip_address": "192.0.2.11",
+      "user_agent": "Sample Browser",
+      "created_at": "2026-07-11T18:00:00+08:00"
+    }
+  ]
+}
