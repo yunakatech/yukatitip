@@ -1,6 +1,7 @@
 export type FieldErrors = Record<string, string[]>;
 
 export type MasterDataErrorCode =
+	| 'AUTH_REQUIRED'
 	| 'VALIDATION_ERROR'
 	| 'FORBIDDEN'
 	| 'RESOURCE_NOT_FOUND'
@@ -9,7 +10,13 @@ export type MasterDataErrorCode =
 	| 'DUPLICATE_RESOURCE'
 	| 'CUSTOMER_PHONE_EXISTS'
 	| 'BRANCH_ACCESS_DENIED'
-	| 'ACCOUNT_INACTIVE';
+	| 'ACCOUNT_INACTIVE'
+	| 'ORDER_ROUTE_MISMATCH'
+	| 'INVALID_STATUS_TRANSITION'
+	| 'PAYMENT_AMOUNT_INVALID'
+	| 'FILE_TYPE_NOT_ALLOWED'
+	| 'FILE_TOO_LARGE'
+	| 'STORAGE_UNAVAILABLE';
 
 export class MasterDataError extends Error {
 	readonly code: MasterDataErrorCode;
@@ -71,4 +78,43 @@ export function customerPhoneExistsError(): MasterDataError {
 
 export function branchAccessDeniedError(message = 'Cabang tidak dapat diakses.'): MasterDataError {
 	return new MasterDataError('BRANCH_ACCESS_DENIED', 403, message);
+}
+
+export function orderRouteMismatchError(): MasterDataError {
+	return new MasterDataError(
+		'ORDER_ROUTE_MISMATCH',
+		422,
+		'Arah pesanan tidak sesuai dengan rute yang dipilih.',
+		{
+			routeId: ['Pilih rute yang sesuai dengan cabang asal dan tujuan.']
+		}
+	);
+}
+
+export function invalidStatusTransitionError(
+	message = 'Perubahan status pesanan tidak diperbolehkan.'
+): MasterDataError {
+	return new MasterDataError('INVALID_STATUS_TRANSITION', 409, message);
+}
+
+export function paymentAmountInvalidError(message = 'Nominal pembayaran tidak valid.'): MasterDataError {
+	return new MasterDataError('PAYMENT_AMOUNT_INVALID', 422, message, {
+		amount: [message]
+	});
+}
+
+export function fileTypeNotAllowedError(message = 'Tipe file tidak didukung.'): MasterDataError {
+	return new MasterDataError('FILE_TYPE_NOT_ALLOWED', 422, message, {
+		attachment: [message]
+	});
+}
+
+export function fileTooLargeError(message = 'Ukuran file melebihi batas.'): MasterDataError {
+	return new MasterDataError('FILE_TOO_LARGE', 422, message, {
+		attachment: [message]
+	});
+}
+
+export function storageUnavailableError(message = 'Storage file belum tersedia.'): MasterDataError {
+	return new MasterDataError('STORAGE_UNAVAILABLE', 503, message);
 }

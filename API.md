@@ -675,7 +675,8 @@ Response `201`:
     "trackingNumber": "YKT-2607-00125",
     "status": "recorded",
     "paymentStatus": "unpaid",
-    "totalCustomerPayment": 410000
+    "totalCustomerPayment": 410000,
+    "version": 1
   },
   "meta": {
     "requestId": "req_01J..."
@@ -686,6 +687,7 @@ Response `201`:
 Server wajib:
 
 - Membuat nomor tracking.
+- Menggunakan `Idempotency-Key` bila tersedia agar retry request tidak membuat pesanan ganda.
 - Memvalidasi arah route.
 - Membuat item secara transaksional.
 - Membuat tracking event awal.
@@ -733,7 +735,7 @@ Response:
 }
 ```
 
-`expectedVersion` direkomendasikan untuk mencegah lost update.
+`expectedVersion` wajib digunakan oleh client yang mengubah data pesanan setelah membaca detail. Database menaikkan `orders.version` pada setiap perubahan order untuk mencegah lost update.
 
 ## 9.5 Tambah Pembayaran
 
@@ -751,7 +753,7 @@ Request:
 }
 ```
 
-Server tidak otomatis memverifikasi pembayaran kecuali user memiliki permission.
+Form internal dapat mengunggah bukti pembayaran langsung ke R2 private saat mencatat pembayaran. Metadata file disimpan di `attachments` dengan `entity_type='payment'`. API JSON tetap menerima `attachmentId` untuk flow presign/complete ketika endpoint upload penuh digunakan. Server tidak otomatis memverifikasi pembayaran kecuali user memiliki permission.
 
 ## 9.6 Verifikasi Pembayaran
 

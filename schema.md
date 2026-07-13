@@ -87,6 +87,8 @@ Dokumen ini menjelaskan struktur database pada `schema.sql`.
 |---|---|
 | `attachments` | Metadata file yang disimpan di R2 |
 | `audit_logs` | Riwayat aksi sensitif, termasuk `request_id` |
+| `business_number_sequences` | Counter server-side untuk nomor bisnis seperti tracking |
+| `idempotency_keys` | Cache response mutasi server-side untuk mencegah retry membuat order ganda |
 
 ## 3. Relasi Utama
 
@@ -165,6 +167,9 @@ BBM, uang makan, parkir, dan tol tidak masuk sebagai tunjangan payroll.
 - Pesanan hanya dapat masuk ke batch dengan route yang sama.
 - Satu pesanan hanya dapat berada pada satu batch aktif melalui `trip_orders`.
 - Tracking number, trip number, task number, employee number, dan nomor WhatsApp customer harus unik.
+- Nomor tracking dibuat di database melalui counter periode `YKT-YYMM-SEQUENCE`.
+- Create order dapat memakai `Idempotency-Key`; response disimpan sementara di `idempotency_keys`.
+- `orders.version` dinaikkan oleh trigger database pada setiap perubahan order dan dipakai oleh API melalui `expectedVersion`.
 - Nilai uang tidak boleh negatif, kecuali `payroll_items.amount` yang dapat digunakan untuk potongan.
 - Periode efektif dan kontrak tidak boleh berakhir sebelum tanggal mulai.
 - Komisi negatif otomatis menjadi nol, lalu komisi dibulatkan matematis ke rupiah terdekat oleh database.
@@ -219,6 +224,8 @@ Tabel `attachments` menyimpan:
 - Ukuran.
 - Pengunggah.
 - Status private.
+
+Bukti pembayaran disimpan sebagai attachment private dengan `entity_type='payment'` dan `entity_id` menunjuk ke row `payments`.
 
 ## 8. Urutan Instalasi
 

@@ -606,6 +606,7 @@ create table if not exists public.orders (
   updated_by uuid references public.profiles(id),
   created_at timestamptz not null default timezone('utc', now()),
   updated_at timestamptz not null default timezone('utc', now()),
+  version integer not null default 1 check (version >= 1),
   constraint orders_different_branches check (origin_branch_id <> destination_branch_id)
 );
 
@@ -1065,6 +1066,22 @@ create trigger validate_trip_order_route_trigger
 before insert or update of trip_id, order_id
 on public.trip_orders
 for each row execute function public.validate_trip_order_route();
+
+create or replace function public.increment_order_version()
+returns trigger
+language plpgsql
+set search_path = public
+as $$
+begin
+  new.version = old.version + 1;
+  return new;
+end;
+$$;
+
+drop trigger if exists increment_orders_version_trigger on public.orders;
+create trigger increment_orders_version_trigger
+before update on public.orders
+for each row execute function public.increment_order_version();
 
 -- ============================================================================
 -- UPDATED_AT TRIGGERS

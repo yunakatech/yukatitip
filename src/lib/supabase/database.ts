@@ -294,6 +294,7 @@ type OrderRow = {
 	updated_by: Nullable<UUID>;
 	created_at: Timestamp;
 	updated_at: Timestamp;
+	version: number;
 };
 
 type OrderItemRow = {
@@ -635,8 +636,8 @@ type CustomerInsert = Pick<CustomerRow, 'name' | 'phone'> & Partial<Pick<Custome
 type CustomerUpdate = Partial<Omit<CustomerRow, 'id'>>;
 type StoreInsert = Pick<StoreRow, 'name'> & Partial<Pick<StoreRow, 'id' | 'branch_id' | 'address' | 'city' | 'phone' | 'maps_url' | 'opening_hours' | 'notes' | 'is_active' | 'created_at' | 'updated_at'>>;
 type StoreUpdate = Partial<Omit<StoreRow, 'id'>>;
-type OrderInsert = Pick<OrderRow, 'tracking_number' | 'service_type' | 'origin_branch_id' | 'destination_branch_id' | 'route_id' | 'sender_customer_id' | 'created_by'> & Partial<Pick<OrderRow, 'id' | 'fulfillment_method' | 'receiver_customer_id' | 'status' | 'payment_status' | 'goods_amount' | 'service_revenue' | 'additional_service_fees' | 'discount_amount' | 'delivery_address' | 'public_notes' | 'internal_notes' | 'updated_by' | 'created_at' | 'updated_at'>>;
-type OrderUpdate = Partial<Omit<OrderRow, 'id' | 'total_customer_payment'>>;
+type OrderInsert = Pick<OrderRow, 'tracking_number' | 'service_type' | 'origin_branch_id' | 'destination_branch_id' | 'route_id' | 'sender_customer_id' | 'created_by'> & Partial<Pick<OrderRow, 'id' | 'fulfillment_method' | 'receiver_customer_id' | 'status' | 'payment_status' | 'goods_amount' | 'service_revenue' | 'additional_service_fees' | 'discount_amount' | 'delivery_address' | 'public_notes' | 'internal_notes' | 'updated_by' | 'created_at' | 'updated_at' | 'version'>>;
+type OrderUpdate = Partial<Omit<OrderRow, 'id' | 'total_customer_payment' | 'version'>>;
 type OrderItemInsert = Pick<OrderItemRow, 'order_id' | 'product_name'> & Partial<Pick<OrderItemRow, 'id' | 'store_id' | 'product_url' | 'quantity' | 'estimated_unit_price' | 'actual_unit_price' | 'weight_grams' | 'attributes' | 'notes' | 'status' | 'created_at' | 'updated_at'>>;
 type OrderItemUpdate = Partial<Omit<OrderItemRow, 'id'>>;
 type TrackingEventInsert = Pick<TrackingEventRow, 'order_id' | 'status' | 'public_description'> & Partial<Pick<TrackingEventRow, 'id' | 'internal_description' | 'location' | 'created_by' | 'created_at'>>;

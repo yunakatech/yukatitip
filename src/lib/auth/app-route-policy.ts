@@ -28,6 +28,21 @@ export const APP_ROUTE_POLICIES = {
 		allowedRoles: [ROLE_CODES.OWNER, ROLE_CODES.BRANCH_MANAGER, ROLE_CODES.BRANCH_ADMIN],
 		requiredPermissions: [PERMISSION_CODES.ORDERS_MANAGE]
 	},
+	'/(app)/app/orders/new': {
+		access: 'restricted',
+		allowedRoles: [ROLE_CODES.OWNER, ROLE_CODES.BRANCH_MANAGER, ROLE_CODES.BRANCH_ADMIN],
+		requiredPermissions: [PERMISSION_CODES.ORDERS_MANAGE]
+	},
+	'/(app)/app/orders/[orderId]': {
+		access: 'restricted',
+		allowedRoles: [ROLE_CODES.OWNER, ROLE_CODES.BRANCH_MANAGER, ROLE_CODES.BRANCH_ADMIN],
+		requiredPermissions: [PERMISSION_CODES.ORDERS_MANAGE]
+	},
+	'/(app)/app/orders/[orderId]/edit': {
+		access: 'restricted',
+		allowedRoles: [ROLE_CODES.OWNER, ROLE_CODES.BRANCH_MANAGER, ROLE_CODES.BRANCH_ADMIN],
+		requiredPermissions: [PERMISSION_CODES.ORDERS_MANAGE]
+	},
 	'/(app)/app/tasks': {
 		access: 'restricted',
 		allowedRoles: [
