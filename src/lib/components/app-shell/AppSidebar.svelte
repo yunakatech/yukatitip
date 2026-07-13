@@ -1,19 +1,16 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { AuthContext } from '$lib/types/auth';
 	import type { VisibleNavigationGroup } from '$lib/constants/navigation';
 	import { classNames } from '$lib/utils/classnames';
 	import NavigationItem from './NavigationItem.svelte';
-	import BranchIndicator from './BranchIndicator.svelte';
 
 	interface Props {
-		auth: AuthContext;
 		navigation: VisibleNavigationGroup[];
 		currentPath: string;
 		class?: string;
 	}
 
-	let { auth, navigation, currentPath, class: className = '' }: Props = $props();
+	let { navigation, currentPath, class: className = '' }: Props = $props();
 
 	let classes = $derived(classNames('app-sidebar', className));
 </script>
@@ -23,7 +20,6 @@
 		<span class="app-sidebar__mark" aria-hidden="true">Y</span>
 		<span class="app-sidebar__brand-copy">
 			<strong>Yukatitip</strong>
-			<span>Aplikasi internal</span>
 		</span>
 	</a>
 
@@ -45,17 +41,13 @@
 			</section>
 		{/each}
 	</nav>
-
-	<div class="app-sidebar__footer">
-		<BranchIndicator branch={auth.branch} roleName={auth.role.name} />
-	</div>
 </aside>
 
 <style>
 	.app-sidebar {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.75rem;
 		height: 100%;
 		border-right: 1px solid var(--line-200);
 		background: rgb(255 255 255 / 0.96);
@@ -65,9 +57,9 @@
 	.app-sidebar__brand {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		border-radius: var(--radius-md);
-		padding: 0.5rem 0.625rem;
+		gap: 0.625rem;
+		border-radius: var(--radius-sm);
+		padding: 0.375rem 0.25rem;
 		color: var(--ink-950);
 	}
 
@@ -84,35 +76,23 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 0.75rem;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 0.625rem;
 		background: var(--brand-600);
-		font-size: 1rem;
+		font-size: 0.875rem;
 		font-weight: 800;
 		color: var(--white);
 	}
 
-	.app-sidebar__brand-copy {
-		display: grid;
-		gap: 0.1rem;
-		min-width: 0;
-	}
-
 	.app-sidebar__brand-copy strong {
-		font-size: 0.9375rem;
+		font-size: 0.875rem;
 		line-height: 1.25;
-	}
-
-	.app-sidebar__brand-copy span {
-		font-size: 0.75rem;
-		line-height: 1.25;
-		color: var(--ink-500);
 	}
 
 	.app-sidebar__nav {
 		display: grid;
-		gap: 1rem;
+		gap: 0.75rem;
 		min-width: 0;
 		overflow: auto;
 		padding-right: 0.125rem;
@@ -120,25 +100,21 @@
 
 	.app-sidebar__group {
 		display: grid;
-		gap: 0.5rem;
+		gap: 0.375rem;
 	}
 
 	.app-sidebar__group-label {
 		margin: 0;
 		padding-inline: 0.25rem;
-		font-size: 0.75rem;
+		font-size: 0.6875rem;
 		font-weight: 800;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		color: var(--ink-500);
 	}
 
 	.app-sidebar__items {
 		display: grid;
-		gap: 0.25rem;
-	}
-
-	.app-sidebar__footer {
-		margin-top: auto;
+		gap: 0.125rem;
 	}
 </style>

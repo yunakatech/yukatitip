@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { AuthContext } from '$lib/types/auth';
 	import type { VisibleNavigationGroup } from '$lib/constants/navigation';
 	import AppSidebar from './AppSidebar.svelte';
 	import Icon from './Icon.svelte';
@@ -17,13 +16,12 @@
 
 	interface Props {
 		open: boolean;
-		auth: AuthContext;
 		navigation: VisibleNavigationGroup[];
 		currentPath: string;
 		onClose: () => void;
 	}
 
-	let { open, auth, navigation, currentPath, onClose }: Props = $props();
+	let { open, navigation, currentPath, onClose }: Props = $props();
 
 	let dialogElement = $state<HTMLDialogElement | null>(null);
 
@@ -78,7 +76,7 @@
 
 		<div class="drawer__body">
 			<div class="drawer__sidebar">
-				<AppSidebar {auth} {navigation} {currentPath} />
+				<AppSidebar {navigation} {currentPath} />
 			</div>
 		</div>
 	</div>
@@ -88,7 +86,7 @@
 	.drawer {
 		position: fixed;
 		inset: 0 auto 0 0;
-		width: min(20rem, calc(100vw - 2.5rem));
+		width: min(18rem, calc(100vw - 2.5rem));
 		height: 100dvh;
 		border: 0;
 		margin: 0;
@@ -113,13 +111,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		padding: 1rem 1rem 0;
+		gap: 0.5rem;
+		padding: 0.75rem 0.75rem 0;
 	}
 
 	.drawer__title {
 		margin: 0;
-		font-size: 0.9375rem;
+		font-size: 0.875rem;
 		font-weight: 800;
 		line-height: 1.25;
 		color: var(--ink-950);
@@ -133,6 +131,7 @@
 	.drawer__sidebar {
 		border-right: 0;
 		border-top: 1px solid var(--line-200);
+		margin-top: 0.75rem;
 		height: auto;
 	}
 </style>

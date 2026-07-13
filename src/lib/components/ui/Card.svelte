@@ -25,21 +25,21 @@
 <style>
 	.ui-card {
 		border: 1px solid var(--line-200);
-		border-radius: var(--radius-lg);
+		border-radius: var(--radius-md);
 		background: rgb(255 255 255 / 0.94);
 		box-shadow: var(--shadow-card);
 		color: var(--ink-950);
 	}
 
 	.ui-card--sm {
-		padding: 1rem;
+		padding: 0.875rem;
 	}
 
 	.ui-card--md {
-		padding: 1.25rem;
+		padding: 1rem;
 	}
 
 	.ui-card--lg {
-		padding: 1.5rem;
+		padding: 1.25rem;
 	}
 </style>

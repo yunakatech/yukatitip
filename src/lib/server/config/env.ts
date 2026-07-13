@@ -16,6 +16,7 @@ export type PrivateSecretKey = (typeof PRIVATE_SECRET_KEYS)[number];
 export type AppEnvironment = 'development' | 'preview' | 'production';
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 export type CookieSameSite = 'lax' | 'strict';
+export type LoginRateLimitStrategy = 'binding' | 'kv' | 'waf';
 
 type EnvSource = Record<string, string | undefined>;
 
@@ -63,6 +64,7 @@ export interface AppConfig {
 	rateLimits: {
 		trackingRequests: number;
 		trackingWindowSeconds: number;
+		loginStrategy: LoginRateLimitStrategy;
 		loginRequests: number;
 		loginWindowSeconds: number;
 		orderCreateRequests: number;
@@ -107,6 +109,7 @@ const DEFAULTS = {
 	r2DownloadUrlTtlSeconds: 300,
 	trackingRequests: 10,
 	trackingWindowSeconds: 60,
+	loginStrategy: 'binding' as LoginRateLimitStrategy,
 	loginRequests: 5,
 	loginWindowSeconds: 60,
 	orderCreateRequests: 5,
@@ -526,6 +529,12 @@ export function parseAppConfig(
 				'TRACKING_RATE_LIMIT_WINDOW_SECONDS',
 				DEFAULTS.trackingWindowSeconds,
 				{ min: 1 }
+			),
+			loginStrategy: readEnumValue(
+				privateSource,
+				'LOGIN_RATE_LIMIT_STRATEGY',
+				['binding', 'kv', 'waf'],
+				DEFAULTS.loginStrategy
 			),
 			loginRequests: readNumber(privateSource, 'LOGIN_RATE_LIMIT_REQUESTS', DEFAULTS.loginRequests, {
 				min: 1

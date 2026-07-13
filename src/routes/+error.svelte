@@ -4,7 +4,7 @@
 	import Alert from '$lib/components/ui/Alert.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 
-	let { error }: { error: App.Error } = $props();
+	const message = $derived(page.error?.message ?? 'Terjadi kesalahan yang tidak dapat diproses.');
 </script>
 
 <svelte:head>
@@ -19,13 +19,13 @@
 			<p class="error-card__status">Status {page.status}</p>
 
 			<Alert tone="danger" title="Pesan error">
-				{error.message || 'Terjadi kesalahan yang tidak dapat diproses.'}
+				{message}
 			</Alert>
 
 			<div class="error-card__actions">
-		<a class="button button-primary" href={resolve('/')}>Ke landing</a>
-		<a class="button button-secondary" href={resolve('/login')}>Ke login</a>
-	</div>
+				<a class="button button-primary" href={resolve('/')}>Ke landing</a>
+				<a class="button button-secondary" href={resolve('/login')}>Ke login</a>
+			</div>
 		</div>
 	</Card>
 </main>

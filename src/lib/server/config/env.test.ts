@@ -11,8 +11,17 @@ describe('parseAppConfig', () => {
 		expect(config.public.supabaseUrl).toBeNull();
 		expect(config.uploads.maxUploadSizeBytes).toBe(5_242_880);
 		expect(config.security.cookieSecure).toBe(false);
+		expect(config.rateLimits.loginStrategy).toBe('binding');
 		expect(config.rateLimits.loginWindowSeconds).toBe(60);
 		expect(config.flags.enableDebugRoutes).toBe(false);
+	});
+
+	it('accepts Cloudflare Pages compatible login rate limit strategies', () => {
+		const kvConfig = parseAppConfig({}, { LOGIN_RATE_LIMIT_STRATEGY: 'kv' });
+		const wafConfig = parseAppConfig({}, { LOGIN_RATE_LIMIT_STRATEGY: 'waf' });
+
+		expect(kvConfig.rateLimits.loginStrategy).toBe('kv');
+		expect(wafConfig.rateLimits.loginStrategy).toBe('waf');
 	});
 
 	it('normalizes api base path and trusted origins', () => {

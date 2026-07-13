@@ -19,7 +19,7 @@
 
 <a class={classes} href={href} aria-current={active ? 'page' : undefined}>
 	<span class="nav-item__icon" aria-hidden="true">
-		<Icon name={icon} size={18} />
+		<Icon name={icon} size={16} />
 	</span>
 	<span class="nav-item__content">
 		<span class="nav-item__label">{label}</span>
@@ -31,11 +31,11 @@
 	.nav-item {
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr);
-		gap: 0.75rem;
-		align-items: start;
+		gap: 0.625rem;
+		align-items: center;
 		border: 1px solid transparent;
-		border-radius: var(--radius-md);
-		padding: 0.75rem 0.875rem;
+		border-radius: var(--radius-sm);
+		padding: 0.5rem 0.625rem;
 		color: var(--ink-700);
 		transition:
 			background-color 140ms ease,
@@ -48,7 +48,6 @@
 		background: rgb(79 70 229 / 0.04);
 		border-color: var(--brand-100);
 		color: var(--ink-950);
-		transform: translateY(-1px);
 	}
 
 	.nav-item:focus-visible {
@@ -66,26 +65,35 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 1.5rem;
-		height: 1.5rem;
-		border-radius: 0.5rem;
-		background: rgb(255 255 255 / 0.84);
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 0.375rem;
 		color: currentColor;
 	}
 
 	.nav-item__content {
-		display: grid;
-		gap: 0.125rem;
+		display: block;
 		min-width: 0;
 	}
 
 	.nav-item__label {
-		font-size: 0.9375rem;
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-size: 0.875rem;
 		font-weight: 700;
-		line-height: 1.35;
+		line-height: 1.3;
 	}
 
 	.nav-item__description {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		white-space: nowrap;
 		font-size: 0.8125rem;
 		line-height: 1.45;
 		color: var(--ink-500);

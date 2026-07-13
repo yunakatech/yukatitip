@@ -12,12 +12,11 @@
 	interface Props {
 		auth: AuthContext;
 		title: string;
-		description?: string;
 		isNavigationOpen: boolean;
 		onOpenNavigation: () => void;
 	}
 
-	let { auth, title, description, isNavigationOpen, onOpenNavigation }: Props = $props();
+	let { auth, title, isNavigationOpen, onOpenNavigation }: Props = $props();
 </script>
 
 <header class="topbar">
@@ -38,11 +37,7 @@
 		</div>
 
 		<div class="topbar__titles">
-			<p class="topbar__eyebrow">Aplikasi internal</p>
 			<h1 class="topbar__title">{title}</h1>
-			{#if description}
-				<p class="topbar__description">{description}</p>
-			{/if}
 		</div>
 	</div>
 
@@ -67,13 +62,13 @@
 		border-bottom: 1px solid var(--line-200);
 		background: rgb(249 250 251 / 0.92);
 		backdrop-filter: blur(12px);
-		padding: 0.875rem 1rem;
+		padding: 0.625rem 0.875rem;
 	}
 
 	.topbar__primary {
 		display: flex;
 		align-items: center;
-		gap: 0.875rem;
+		gap: 0.625rem;
 		min-width: 0;
 	}
 
@@ -87,27 +82,12 @@
 		min-width: 0;
 	}
 
-	.topbar__eyebrow {
-		margin: 0;
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--ink-500);
-	}
-
 	.topbar__title {
 		margin: 0;
-		font-size: 1.125rem;
+		font-size: 1rem;
+		font-weight: 750;
 		line-height: 1.25;
 		color: var(--ink-950);
-	}
-
-	.topbar__description {
-		margin: 0;
-		font-size: 0.875rem;
-		line-height: 1.5;
-		color: var(--ink-600);
 	}
 
 	.topbar__meta {
@@ -115,13 +95,13 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: flex-end;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		margin-left: auto;
 	}
 
 	@media (min-width: 960px) {
 		.topbar {
-			padding-inline: 1.25rem;
+			padding: 0.625rem 1rem;
 		}
 
 		.topbar__menu-button {

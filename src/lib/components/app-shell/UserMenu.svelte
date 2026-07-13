@@ -20,10 +20,9 @@
 		</span>
 		<span class="user-menu__copy">
 			<strong>{firstName}</strong>
-			<span>{auth.profile.role.name}</span>
 		</span>
 		<span class="user-menu__chevron" aria-hidden="true">
-			<Icon name="chevron-down" size={16} />
+			<Icon name="chevron-down" size={14} />
 		</span>
 	</summary>
 
@@ -31,13 +30,16 @@
 		<div class="user-menu__profile">
 			<strong>{auth.profile.fullName}</strong>
 			<span>{auth.user.email ?? 'Email tidak tersedia'}</span>
-			<span>{auth.branch ? auth.branch.name : 'Seluruh cabang'}</span>
+			<span>{auth.profile.role.name}</span>
 		</div>
 
-		<a class="user-menu__link" href={resolve('/')}>Buka landing publik</a>
+		<a class="user-menu__link" href={resolve('/')}>
+			<Icon name="dashboard" size={15} />
+			<span>Landing publik</span>
+		</a>
 
 		<form class="user-menu__logout" method="POST" action={resolve('/logout')}>
-			<Button variant="secondary" fullWidth type="submit">
+			<Button variant="secondary" size="sm" fullWidth type="submit">
 				<Icon name="logout" size={16} />
 				<span>Keluar</span>
 			</Button>
@@ -61,11 +63,11 @@
 	.user-menu__summary {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: 0.5rem;
 		border: 1px solid var(--line-200);
 		border-radius: 999px;
 		background: rgb(255 255 255 / 0.92);
-		padding: 0.5rem 0.625rem 0.5rem 0.5rem;
+		padding: 0.375rem 0.5rem 0.375rem 0.375rem;
 		color: var(--ink-800);
 		cursor: pointer;
 		transition:
@@ -88,8 +90,8 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2rem;
-		height: 2rem;
+		width: 1.625rem;
+		height: 1.625rem;
 		border-radius: 999px;
 		background: var(--brand-50);
 		color: var(--brand-700);
@@ -102,14 +104,8 @@
 	}
 
 	.user-menu__copy strong {
-		font-size: 0.875rem;
+		font-size: 0.8125rem;
 		line-height: 1.25;
-	}
-
-	.user-menu__copy span {
-		font-size: 0.75rem;
-		line-height: 1.3;
-		color: var(--ink-500);
 	}
 
 	.user-menu__chevron {
@@ -125,16 +121,16 @@
 	.user-menu__panel {
 		position: absolute;
 		right: 0;
-		top: calc(100% + 0.5rem);
+		top: calc(100% + 0.375rem);
 		z-index: 20;
-		width: min(24rem, calc(100vw - 2rem));
+		width: min(18rem, calc(100vw - 2rem));
 		border: 1px solid var(--line-200);
-		border-radius: var(--radius-lg);
+		border-radius: var(--radius-md);
 		background: rgb(255 255 255 / 0.98);
 		box-shadow: var(--shadow-overlay);
-		padding: 1rem;
+		padding: 0.75rem;
 		display: grid;
-		gap: 0.875rem;
+		gap: 0.625rem;
 	}
 
 	.user-menu__profile {
@@ -143,7 +139,7 @@
 	}
 
 	.user-menu__profile strong {
-		font-size: 0.9375rem;
+		font-size: 0.875rem;
 		color: var(--ink-950);
 	}
 
@@ -156,9 +152,12 @@
 	.user-menu__link {
 		display: inline-flex;
 		align-items: center;
-		min-height: 44px;
-		border-radius: var(--radius-md);
-		padding: 0 0.875rem;
+		gap: 0.5rem;
+		min-height: 36px;
+		border-radius: var(--radius-sm);
+		padding: 0 0.75rem;
+		font-size: 0.8125rem;
+		font-weight: 700;
 		color: var(--ink-800);
 		background: var(--surface-100);
 	}

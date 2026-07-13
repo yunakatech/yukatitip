@@ -9,13 +9,12 @@
 	}
 
 	let { eyebrow, title, description, actions }: Props = $props();
+
+	let accessibleLabel = $derived(eyebrow ? `${eyebrow}: ${title}` : title);
 </script>
 
-<header class="page-header">
+<header class="page-header" aria-label={accessibleLabel}>
 	<div class="page-header__copy">
-		{#if eyebrow}
-			<p class="page-header__eyebrow">{eyebrow}</p>
-		{/if}
 		<h2 class="page-header__title">{title}</h2>
 		{#if description}
 			<p class="page-header__description">{description}</p>
@@ -35,27 +34,18 @@
 		flex-wrap: wrap;
 		align-items: flex-start;
 		justify-content: space-between;
-		gap: 1rem;
+		gap: 0.75rem;
 	}
 
 	.page-header__copy {
 		display: grid;
-		gap: 0.25rem;
+		gap: 0.1875rem;
 		min-width: 0;
-	}
-
-	.page-header__eyebrow {
-		margin: 0;
-		font-size: 0.75rem;
-		font-weight: 800;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--ink-500);
 	}
 
 	.page-header__title {
 		margin: 0;
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		line-height: 1.2;
 		color: var(--ink-950);
 	}
@@ -63,15 +53,15 @@
 	.page-header__description {
 		margin: 0;
 		max-width: 58ch;
-		font-size: 0.9375rem;
-		line-height: 1.65;
+		font-size: 0.875rem;
+		line-height: 1.5;
 		color: var(--ink-600);
 	}
 
 	.page-header__actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		align-items: center;
 	}
 </style>

@@ -19,9 +19,6 @@
 	let visibleNavigation = $derived(getVisibleNavigation(auth));
 	let currentNavigation = $derived(getNavigationMatch(visibleNavigation, currentPath));
 	let topbarTitle = $derived(currentNavigation?.label ?? 'Dashboard');
-	let topbarDescription = $derived(
-		currentNavigation?.description ?? 'Area kerja internal Yukatitip yang diproteksi'
-	);
 	let previousPath = '';
 
 	$effect(() => {
@@ -47,14 +44,13 @@
 
 <div class="app-shell-layout">
 	<div class="app-shell-layout__sidebar">
-		<AppSidebar {auth} navigation={visibleNavigation} {currentPath} />
+		<AppSidebar navigation={visibleNavigation} {currentPath} />
 	</div>
 
 	<div class="app-shell-layout__workspace">
 		<AppTopbar
 			{auth}
 			title={topbarTitle}
-			description={topbarDescription}
 			isNavigationOpen={isMobileNavigationOpen}
 			onOpenNavigation={openNavigation}
 		/>
@@ -68,7 +64,6 @@
 
 	<MobileNavigationDrawer
 		open={isMobileNavigationOpen}
-		{auth}
 		navigation={visibleNavigation}
 		{currentPath}
 		onClose={closeNavigation}
@@ -94,18 +89,18 @@
 
 	.app-shell-layout__content {
 		min-width: 0;
-		padding: 1rem;
+		padding: 0.875rem;
 	}
 
 	.app-shell-layout__content-inner {
 		display: grid;
-		gap: 1rem;
+		gap: 0.875rem;
 		max-width: 88rem;
 	}
 
 	@media (min-width: 1024px) {
 		.app-shell-layout {
-			grid-template-columns: 16rem minmax(0, 1fr);
+			grid-template-columns: 15rem minmax(0, 1fr);
 		}
 
 		.app-shell-layout__sidebar {
@@ -116,7 +111,7 @@
 		}
 
 		.app-shell-layout__content {
-			padding: 1.25rem 1.5rem 1.75rem;
+			padding: 1rem 1.25rem 1.5rem;
 		}
 	}
 </style>

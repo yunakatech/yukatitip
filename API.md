@@ -64,6 +64,7 @@ Nilai public tidak boleh dianggap rahasia.
 | `R2_DOWNLOAD_URL_TTL_SECONDS` | Masa berlaku URL download |
 | `TRACKING_RATE_LIMIT_REQUESTS` | Batas request tracking |
 | `TRACKING_RATE_LIMIT_WINDOW_SECONDS` | Jendela rate limit tracking |
+| `LOGIN_RATE_LIMIT_STRATEGY` | Strategi rate limit login: `binding`, `kv`, atau `waf` |
 | `LOGIN_RATE_LIMIT_REQUESTS` | Batas percobaan login |
 | `LOGIN_RATE_LIMIT_WINDOW_SECONDS` | Jendela rate limit login (60 detik) |
 | `DEFAULT_PAGE_SIZE` | Pagination default |
@@ -81,7 +82,7 @@ Production menggunakan native binding:
 | `YUKATITIP_PUBLIC_BUCKET` | Bucket R2 aset publik |
 | `YUKATITIP_CONFIG_KV` | KV konfigurasi/cache non-transaksional |
 
-Login production memakai binding `LOGIN_RATE_LIMITER` dengan jendela 60 detik. Fallback in-memory hanya untuk local development dan test.
+Login production memakai binding `LOGIN_RATE_LIMITER` dengan jendela 60 detik bila runtime mendukung Workers rate limiting bindings. Untuk Cloudflare Pages yang tidak menyediakan resource binding Rate Limiting, set `LOGIN_RATE_LIMIT_STRATEGY=kv` agar counter login disimpan sementara di `YUKATITIP_CONFIG_KV`. Jika rate limit ditangani penuh oleh Cloudflare WAF, set `LOGIN_RATE_LIMIT_STRATEGY=waf` dan buat WAF Rate Limiting Rule untuk `POST /login` dengan batas yang sama. Fallback in-memory hanya untuk local development dan test.
 
 Nama binding aktual dikonfigurasi di Wrangler atau dashboard Cloudflare. Jangan mengirim binding ke browser.
 

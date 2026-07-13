@@ -38,36 +38,36 @@
 	.ui-empty-state {
 		display: grid;
 		justify-items: start;
-		gap: 1rem;
+		gap: 0.75rem;
 		border: 1px dashed var(--line-300);
-		border-radius: var(--radius-lg);
+		border-radius: var(--radius-md);
 		background: rgb(255 255 255 / 0.88);
-		padding: 1.25rem;
+		padding: 1rem;
 	}
 
 	.ui-empty-state__body {
 		display: grid;
-		gap: 0.375rem;
+		gap: 0.25rem;
 	}
 
 	.ui-empty-state__title {
 		margin: 0;
-		font-size: 1rem;
+		font-size: 0.9375rem;
 		font-weight: 700;
-		line-height: 1.4;
+		line-height: 1.35;
 		color: var(--ink-950);
 	}
 
 	.ui-empty-state__description {
 		margin: 0;
 		font-size: 0.875rem;
-		line-height: 1.65;
+		line-height: 1.5;
 		color: var(--ink-600);
 	}
 
 	.ui-empty-state__actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: 0.5rem;
 	}
 </style>
