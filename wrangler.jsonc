@@ -8,28 +8,38 @@
 	"r2_buckets": [
 		{
 			"binding": "YUKATITIP_PRIVATE_BUCKET",
-			"bucket_name": "yukatitip-private"
+			"bucket_name": "yukatitip-preview-private"
 		},
 		{
 			"binding": "YUKATITIP_PUBLIC_BUCKET",
-			"bucket_name": "yukatitip-public"
+			"bucket_name": "yukatitip-preview-public"
 		}
 	],
 	"kv_namespaces": [
 		{
 			"binding": "YUKATITIP_CONFIG_KV",
-			"id": "00000000000000000000000000000000"
+			"id": "b165a026c1f540629504f3e5f5958d6a"
 		}
 	],
-	"ratelimits": [
-		{
-			"name": "LOGIN_RATE_LIMITER",
-			"namespace_id": "1001",
-			"simple": {
-				"limit": 5,
-				"period": 60
-			}
+	"pages_build_output_dir": ".svelte-kit/cloudflare",
+	"env": {
+		"production": {
+			"r2_buckets": [
+				{
+					"binding": "YUKATITIP_PRIVATE_BUCKET",
+					"bucket_name": "yukatitip-private"
+				},
+				{
+					"binding": "YUKATITIP_PUBLIC_BUCKET",
+					"bucket_name": "yukatitip-public"
+				}
+			],
+			"kv_namespaces": [
+				{
+					"binding": "YUKATITIP_CONFIG_KV",
+					"id": "371a66e898be48089e82b47c2607c407"
+				}
+			]
 		}
-	],
-	"pages_build_output_dir": ".svelte-kit/cloudflare"
+	}
 }

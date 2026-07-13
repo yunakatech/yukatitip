@@ -8,7 +8,9 @@ import type { AuthContext } from '$lib/types/auth';
 declare global {
 	namespace App {
 		interface Platform {
-			env: Env;
+			env: Env & {
+				LOGIN_RATE_LIMITER?: RateLimit;
+			};
 			ctx: ExecutionContext;
 			caches: CacheStorage;
 			cf?: IncomingRequestCfProperties;
